@@ -10,6 +10,8 @@ public class GunController : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool isReload = false;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -37,7 +39,7 @@ public class GunController : MonoBehaviour
     /// </summary>
     private void TryFire()
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0)
+        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
         {
             Fire();
         }
@@ -48,8 +50,18 @@ public class GunController : MonoBehaviour
     /// </summary>
     private void Fire()
     {
-        currentFireRate = currentGun.fireRate;
-        Shoot();
+        if (!isReload)
+        {
+            if (currentGun.currentBulletCount > 0)
+            {
+                Shoot();
+            }
+            else
+            {
+                StartCoroutine(ReloadCoroutine());
+            }
+        }
+        
     }
 
     /// <summary>
@@ -57,9 +69,35 @@ public class GunController : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
+        currentGun.currentBulletCount--;
+        currentFireRate = currentGun.fireRate; // 연사 속도 재계산
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();
         Debug.Log("FIRE");
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        if(currentGun.carryBulletCount > 0)
+        {
+            isReload = true;
+            currentGun.anim.SetTrigger("Reload");
+
+            yield return new WaitForSeconds(currentGun.reloadTime);
+            
+            if(currentGun.carryBulletCount >= currentGun.reloadBulletCount)
+            {
+                currentGun.currentBulletCount = currentGun.reloadBulletCount;
+                currentGun.carryBulletCount -= currentGun.reloadBulletCount;
+            }
+            else
+            {
+                currentGun.currentBulletCount = currentGun.carryBulletCount;
+                currentGun.carryBulletCount = 0;
+            }
+        }
+
+        isReload = false;
     }
 
     private void PlaySE(AudioClip clip)

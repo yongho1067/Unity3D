@@ -11788,7 +11788,7 @@ Animator:
   m_GameObject: {fileID: 1689216888454516936}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: cf508b187df82eb41944d877a188d3b7, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de97e43b9e0e949448ff75a5d8481c35, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12123,10 +12123,10 @@ MonoBehaviour:
   fireRate: 0.2
   reloadTime: 2
   damage: 30
-  reloadBulletCount: 0
-  currentBulletCount: 0
+  reloadBulletCount: 10
+  currentBulletCount: 10
   maxBulletCount: 0
-  carryBulletCount: 0
+  carryBulletCount: 23
   retroActionForce: 0
   retroActionFineSightForce: 0
   FineSightOriginPos: {x: 0, y: 0, z: 0}
