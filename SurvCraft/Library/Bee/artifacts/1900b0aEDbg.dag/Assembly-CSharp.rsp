@@ -350,6 +350,7 @@
 "Assets/Scripts/Controller/GunController.cs"
 "Assets/Scripts/Controller/HandController.cs"
 "Assets/Scripts/Controller/PlayerController.cs"
+"Assets/Scripts/UI/HUD.cs"
 "Assets/Scripts/Weapons/Gun.cs"
 "Assets/Scripts/Weapons/Hand.cs"
 -langversion:9.0

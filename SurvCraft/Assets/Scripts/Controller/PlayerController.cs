@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     private bool isTouchingGround = true;
     #endregion
 
+    private GunController gunController;
+
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
         originPosY = mainCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
+        gunController = FindObjectOfType<GunController>();
     }
 
     void Update()
@@ -163,6 +166,9 @@ public class PlayerController : MonoBehaviour
         // 앉은 상태에서 달릴시 앉은 상태 해제
         if (isCrouch)
             Crouch();
+
+        gunController.CancelFineSight();
+
         isRun = true;
         applySpeed = runSpeed;
     }
