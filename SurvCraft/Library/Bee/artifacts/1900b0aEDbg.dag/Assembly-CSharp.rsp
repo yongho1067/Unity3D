@@ -350,9 +350,12 @@
 "Assets/Scripts/Controller/GunController.cs"
 "Assets/Scripts/Controller/HandController.cs"
 "Assets/Scripts/Controller/PlayerController.cs"
+"Assets/Scripts/Manager/WeaponManager.cs"
+"Assets/Scripts/UI/Crosshair.cs"
 "Assets/Scripts/UI/HUD.cs"
 "Assets/Scripts/Weapons/Gun.cs"
 "Assets/Scripts/Weapons/Hand.cs"
+"Assets/Scripts/Weapons/WeaponSway.cs"
 -langversion:9.0
 
 /deterministic

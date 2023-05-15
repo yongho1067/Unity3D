@@ -27,24 +27,30 @@ public class PlayerController : MonoBehaviour
 
     private CapsuleCollider capsuleCollider; // 착지 여부
     private Rigidbody myRigidbody;
+
     #endregion
 
     #region Bool
+    private bool isWalk = false;
     private bool isCrouch = false;
     private bool isRun = false;
     private bool isTouchingGround = true;
     #endregion
 
     private GunController gunController;
+    private Crosshair crosshair;
 
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigidbody = GetComponent<Rigidbody>();
-        applySpeed = walkSpeed;
-        originPosY = mainCamera.transform.localPosition.y;
-        applyCrouchPosY = originPosY;
         gunController = FindObjectOfType<GunController>();
+        crosshair = FindObjectOfType<Crosshair>();
+        
+
+        applySpeed = walkSpeed;
+        applyCrouchPosY = originPosY;
+        originPosY = mainCamera.transform.localPosition.y;
     }
 
     void Update()
@@ -55,6 +61,7 @@ public class PlayerController : MonoBehaviour
         TryRun();
         TryCrouch();
         Move();
+        MoveCheck();
         #endregion
 
         #region Camera
@@ -78,6 +85,7 @@ public class PlayerController : MonoBehaviour
     private void Crouch()
     {
         isCrouch = !isCrouch;
+        crosshair.CrouchingAnimation(isCrouch);
 
         if (isCrouch)
         {
@@ -121,6 +129,9 @@ public class PlayerController : MonoBehaviour
         // Vector3.down => 고정된 위치에서 무조건 하단을 가르켜야 하기 때문에
         // capsuleCollider.bounds.extents.y => 캡슐콜라이더의 영역의 y값의 절반
         isTouchingGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+
+        
+        crosshair.JumpingAnimation(!isTouchingGround);
     }
 
     /// <summary>
@@ -170,12 +181,15 @@ public class PlayerController : MonoBehaviour
         gunController.CancelFineSight();
 
         isRun = true;
+
+        crosshair.RunningAnimation(isRun);
         applySpeed = runSpeed;
     }
 
     private void RunningCancel()
     {
         isRun = false;
+        crosshair.RunningAnimation(isRun);
         applySpeed = walkSpeed;
     }
     #endregion
@@ -202,6 +216,22 @@ public class PlayerController : MonoBehaviour
         // Time.deltaTime 이 없을 경우 순간이동을 함
         // 스르륵 움직이게 하기 위함
         myRigidbody.MovePosition(transform.position + velocity * Time.deltaTime);
+
+        isWalk = moveDirX != 0 || moveDirZ != 0;
+    }
+
+    private void MoveCheck()
+    {
+        if (!isRun && !isCrouch && isTouchingGround)
+        {
+            if (!isWalk)
+            {
+                // 움직이지 않을 때의 처리
+                isWalk = false;
+            }
+            crosshair.WalkingAnimation(isWalk);
+            
+        }
     }
     #endregion
 

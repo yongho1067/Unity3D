@@ -57,11 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controller\GunController.cs" />
+    <Compile Include="Assets\Scripts\UI\HUD.cs" />
     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
     <Compile Include="Assets\Scripts\Weapons\Hand.cs" />
+    <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Controller\HandController.cs" />
-    <Compile Include="Assets\Scripts\UI\HUD.cs" />
+    <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\Weapons\WeaponSway.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
