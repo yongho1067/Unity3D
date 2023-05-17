@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -25,27 +25,48 @@ public class WeaponManager : MonoBehaviour
 
     // 무기 종류들 전부 관리
     [SerializeField] private Gun[] guns;
-    [SerializeField] private Hand[] hands;
+    [SerializeField] private CloseWeapon[] hands;
+    [SerializeField] private CloseWeapon[] axes;
+    [SerializeField] private CloseWeapon[] pickaxes;
 
     // 배열 관리 차원에서 쉽게 무기 접근이 가능하도록 만듬
     private Dictionary<string, Gun> gunDictionary = new Dictionary<string, Gun>();
-    private Dictionary<string, Hand> handDictionary = new Dictionary<string, Hand>();
+    private Dictionary<string, CloseWeapon> handDictionary = new Dictionary<string, CloseWeapon>();
+    private Dictionary<string, CloseWeapon> axeDictionary = new Dictionary<string, CloseWeapon>();
+    private Dictionary<string, CloseWeapon> pickaxeDictionary = new Dictionary<string, CloseWeapon>();
 
     // 필요한 컴포넌트
     [SerializeField] private GunController gunController;
     [SerializeField] private HandController handController;
+    [SerializeField] private AxeController axeController;
+    [SerializeField] private PickaxeController pickaxeController;
 
+    [SerializeField] private Image BulletUI;
+
+
+
+    private void Awake()
+    {
+
+    }
 
     void Start()
     {
         for (int i = 0; i < guns.Length; i++)
         {
             gunDictionary.Add(guns[i].gunName, guns[i]);
-
         }
         for (int i = 0; i < hands.Length; i++)
         {
-            handDictionary.Add(hands[i].handName, hands[i]);
+            handDictionary.Add(hands[i].closeWeaponName, hands[i]);
+        }
+        for (int i = 0; i < hands.Length; i++)
+        {
+            axeDictionary.Add(axes[i].closeWeaponName, axes[i]);
+        }
+        for (int i = 0; i < pickaxes.Length; i++)
+        {
+            pickaxeDictionary.Add(pickaxes[i].closeWeaponName, pickaxes[i]);
         }
     }
 
@@ -53,16 +74,30 @@ public class WeaponManager : MonoBehaviour
     {
         if (!isChangeWeapon)
         {
+            
             // 숫자 1 눌렀을 경우 맨손으로
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !(currentWeapon.name == "Hand"))
             {
+                BulletUI.gameObject.SetActive(false);
                 StartCoroutine(ChangeWeaponCoroutine("HAND","맨손"));
             }
             // 숫자 2 눌렀을 경우 서브머신건으로
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && !(currentWeapon.name == "SubMachineGun1"))
             {
+                BulletUI.gameObject.SetActive(true);
                 StartCoroutine(ChangeWeaponCoroutine("GUN", "서브머신건1"));
-
+            }
+            // 숫자 3 눌렀을 경우 도끼 로
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && !(currentWeapon.name == "Axe"))
+            {
+                BulletUI.gameObject.SetActive(false);
+                StartCoroutine(ChangeWeaponCoroutine("AXE", "도끼"));
+            }
+            // 숫자 4 눌렀을 경우 곡괭이로
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && !(currentWeapon.name == "Pickaxe"))
+            {
+                BulletUI.gameObject.SetActive(false);
+                StartCoroutine(ChangeWeaponCoroutine("PICKAXE", "곡괭이"));
             }
         }
     }
@@ -101,6 +136,12 @@ public class WeaponManager : MonoBehaviour
             case "HAND":
                 HandController.isActivate = false;
                 break;
+            case "AXE":
+                AxeController.isActivate = false;
+                break;
+            case "PICKAXE":
+                AxeController.isActivate = false;
+                break;
         }
     }
 
@@ -115,7 +156,15 @@ public class WeaponManager : MonoBehaviour
         }
         else if(type == "HAND")
         {
-            handController.HandChange(handDictionary[name]);
+            handController.CloseWeaponChange(handDictionary[name]);
+        }
+        else if(type == "AXE")
+        {
+            axeController.CloseWeaponChange(axeDictionary[name]);
+        }
+        else if(type == "PICKAXE")
+        {
+            pickaxeController.CloseWeaponChange(pickaxeDictionary[name]);
         }
     }
 }

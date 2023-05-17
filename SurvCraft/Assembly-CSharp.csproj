@@ -56,15 +56,19 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Effect\WeaponSway.cs" />
+    <Compile Include="Assets\Scripts\Controller\AxeController.cs" />
     <Compile Include="Assets\Scripts\Controller\GunController.cs" />
     <Compile Include="Assets\Scripts\UI\HUD.cs" />
     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\Controller\CloseWeaponController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Hand.cs" />
+    <Compile Include="Assets\Scripts\Weapons\CloseWeapon.cs" />
     <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Controller\HandController.cs" />
-    <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
-    <Compile Include="Assets\Scripts\Weapons\WeaponSway.cs" />
+    <Compile Include="Assets\Scripts\Controller\PickaxeController.cs" />
+    <Compile Include="Assets\Scripts\Enviroment\Rock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

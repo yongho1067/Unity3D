@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     // 활성화 여부
-    public static bool isActivate = true;
+    public static bool isActivate = false;
     
     // 현재 장착된 총
     [SerializeField] private Gun currentGun;
@@ -29,16 +29,17 @@ public class GunController : MonoBehaviour
     // 피격 이펙트
     [SerializeField] GameObject hit_effect_prefab;
 
+    // 피격 이펙트 하이라키 보관함
+    [SerializeField] GameObject hit_effect_prefab_temp;
+
     private Crosshair crosshair;
+
 
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         crosshair = FindObjectOfType<Crosshair>();
-
-        WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentGun.anim;
     }
 
     private void Update()
@@ -258,7 +259,7 @@ public class GunController : MonoBehaviour
         {
             // hitinfo.point => hit 이벤트가 발생한 오브젝트의 좌표
             // hitinfo.normal => 충돌한 객체의 표면
-            GameObject instance = Instantiate(hit_effect_prefab, hitinfo.point, Quaternion.LookRotation(hitinfo.normal));
+            GameObject instance = Instantiate(hit_effect_prefab, hitinfo.point, Quaternion.LookRotation(hitinfo.normal), hit_effect_prefab_temp.transform);
             Destroy(instance, 2f);
 
         }
