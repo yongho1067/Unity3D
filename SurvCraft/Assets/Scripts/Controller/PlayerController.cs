@@ -40,13 +40,17 @@ public class PlayerController : MonoBehaviour
     private GunController gunController;
     private Crosshair crosshair;
 
+    // 임시 실행 bgm
+    [SerializeField] private string bgm_Sound;
+
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigidbody = GetComponent<Rigidbody>();
         gunController = FindObjectOfType<GunController>();
         crosshair = FindObjectOfType<Crosshair>();
-        
+
+        SoundManager.soundManager.PlayBGM(bgm_Sound);
 
         applySpeed = walkSpeed;
         applyCrouchPosY = originPosY;

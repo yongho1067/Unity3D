@@ -355,6 +355,8 @@
 "Assets/Scripts/Controller/PlayerController.cs"
 "Assets/Scripts/Effect/WeaponSway.cs"
 "Assets/Scripts/Enviroment/Rock.cs"
+"Assets/Scripts/Enviroment/Twig.cs"
+"Assets/Scripts/Manager/SoundManager.cs"
 "Assets/Scripts/Manager/WeaponManager.cs"
 "Assets/Scripts/UI/Crosshair.cs"
 "Assets/Scripts/UI/HUD.cs"

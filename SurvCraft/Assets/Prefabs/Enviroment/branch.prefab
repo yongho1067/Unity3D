@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 23762042803452950}
   - component: {fileID: 65226551303157928}
   - component: {fileID: 54951486538837862}
+  - component: {fileID: 1685815938292183543}
   m_Layer: 0
-  m_Name: branch
+  m_Name: Branch
   m_TagString: Twig
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,3 +116,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1685815938292183543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695725422925852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456981b880d00684bb0cdf1ca4497248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTemp: {fileID: 0}
+  hp: 2
+  destroyTime: 5
+  hit_Effect_prefab: {fileID: 7073227573908936548, guid: ae25c651fd746644291c3ee8ffc649e8, type: 3}
+  little_Twig: {fileID: 6399762288490440087, guid: 442c1e1a237c4944bbb8b5e4c45983d0, type: 3}
+  hitSound: Twig_Hit
+  brokenSound: Twig_Broken

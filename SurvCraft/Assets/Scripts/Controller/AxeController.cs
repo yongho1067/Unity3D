@@ -22,6 +22,10 @@ public class AxeController : CloseWeaponController
         {
             if (CheckObject())
             {
+                if (hitinfo.transform.tag == "Twig")
+                {
+                    hitinfo.transform.GetComponent<Twig>().Damage(this.transform);
+                }
                 isSwing = false;
                 Debug.Log(hitinfo.transform.name);
             }

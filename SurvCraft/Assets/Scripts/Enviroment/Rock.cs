@@ -22,19 +22,16 @@ public class Rock : MonoBehaviour
     // 채굴 이펙트 하이라키 보관함
     [SerializeField] private GameObject effect_Prefabs_Temp;
 
-    // 사운드 이펙트 (임시 수정필요)
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip audioClip;
-    [SerializeField] private AudioClip audioClip2;
-
+    // 음원 파일명
+    [SerializeField] private string strike_Sound;
+    [SerializeField] private string destroy_Sound;
 
     /// <summary>
     /// 채굴
     /// </summary>
     public void Mining()
     {
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        SoundManager.soundManager.PlaySE(strike_Sound);
 
         GameObject instance = Instantiate(effect_Prefab, sphereCollider.bounds.center, Quaternion.identity, effect_Prefabs_Temp.transform);
         Destroy(instance, destroyTime);
@@ -51,8 +48,7 @@ public class Rock : MonoBehaviour
     /// </summary>
     private void DestroyRock()
     {
-        audioSource.clip = audioClip2;
-        audioSource.Play();
+        SoundManager.soundManager.PlaySE(destroy_Sound);
 
         sphereCollider.enabled = false;
         Destroy(normalRock);
