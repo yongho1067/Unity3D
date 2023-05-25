@@ -24,7 +24,15 @@ public abstract class CloseWeaponController : MonoBehaviour
         {
             if (!isAttack)
             {
-                StartCoroutine(AttackCoroutine());
+                if (CheckObject())
+                {
+                    if (currentCloseWeapon.isAxe && hitinfo.transform.tag == "Tree")
+                    {
+                        StartCoroutine(AttackCoroutine("Hit_Tree", currentCloseWeapon.workAble, currentCloseWeapon.workUnable, currentCloseWeapon.workDelay));
+                        return;
+                    }
+                }
+                StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackAble, currentCloseWeapon.attackUnable, currentCloseWeapon.attackDelay));
             }
         }
     }
@@ -32,21 +40,21 @@ public abstract class CloseWeaponController : MonoBehaviour
     /// <summary>
     /// 설정된 공격 딜레이에 따른 코드 제어
     /// </summary>
-    protected IEnumerator AttackCoroutine()
+    protected IEnumerator AttackCoroutine(string swingType, float attackAble, float attackUnable, float attackDelay)
     {
         isAttack = true;
-        currentCloseWeapon.anim.SetTrigger("Attack");
+        currentCloseWeapon.anim.SetTrigger(swingType);
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackAble); // 공격 후 팔이 펴진 상태
+        yield return new WaitForSeconds(attackAble); // 공격 후 팔이 펴진 상태
         isSwing = true;
 
         // 공격 활성화 시점
         StartCoroutine(HitCoroutine());
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackUnable); // 공격 후 팔이 접히는 상태
+        yield return new WaitForSeconds(attackUnable); // 공격 후 팔이 접히는 상태
         isSwing = false;
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackDelay - currentCloseWeapon.attackAble - currentCloseWeapon.attackUnable); // 공격 후 팔이 완전히 접히고 난뒤 공격 딜레이
+        yield return new WaitForSeconds(attackDelay - attackAble - attackUnable); // 공격 후 팔이 완전히 접히고 난뒤 공격 딜레이
         isAttack = false;
     }
 

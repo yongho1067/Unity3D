@@ -19,6 +19,7 @@ public class Grass : MonoBehaviour
     private BoxCollider[] boxColliders;
 
     [SerializeField] private string hit_Sound;
+    [SerializeField] GameObject instance_TEMP;
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class Grass : MonoBehaviour
     {
         SoundManager.soundManager.PlaySE(hit_Sound);
 
-        GameObject instance = Instantiate(hit_effect_prefab, transform.position + Vector3.up, Quaternion.identity);
+        GameObject instance = Instantiate(hit_effect_prefab, transform.position + Vector3.up, Quaternion.identity, instance_TEMP.transform);
         Destroy(instance, destroyTime);
     }
 

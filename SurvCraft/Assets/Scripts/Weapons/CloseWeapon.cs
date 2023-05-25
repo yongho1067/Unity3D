@@ -12,6 +12,10 @@ public class CloseWeapon : MonoBehaviour
     public float attackAble; // 공격 활성화 시점
     public float attackUnable; // 공격 비활성화 시점 
 
+    public float workDelay; // 작업 속도
+    public float workAble; // 작업 활성화 시점
+    public float workUnable; // 작업 비활성화 시점 
+
     public Animator anim; // 애니메이션
 
     // 무기 유형

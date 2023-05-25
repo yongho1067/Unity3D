@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\UI\HUD.cs" />
     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Rock.cs" />
+    <Compile Include="Assets\Scripts\Enviroment\Tree.cs" />
     <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Controller\CloseWeaponController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Controller\HandController.cs" />
-    <Compile Include="Assets\Scripts\Enviroment\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

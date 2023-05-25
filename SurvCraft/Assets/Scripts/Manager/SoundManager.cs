@@ -65,6 +65,7 @@ public class SoundManager : MonoBehaviour
                         playSoundName[j] = effectSounds[i].name;
                         audioSourcesEffects[j].clip = effectSounds[i].clip;
                         audioSourcesEffects[j].Play();
+                        audioSourcesEffects[j].volume = 0.4f;
                         return;
                     }
                 }

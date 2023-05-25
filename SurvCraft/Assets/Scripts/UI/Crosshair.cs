@@ -78,7 +78,6 @@ public class Crosshair : MonoBehaviour
         {
             gunAccuracy = 0.04f;
         }
-        Debug.Log(gunAccuracy);
         return gunAccuracy;
     }
 

@@ -24,10 +24,13 @@ public class AxeController : CloseWeaponController
             {
                 if (hitinfo.transform.tag == "Twig")
                 {
-                    hitinfo.transform.GetComponent<Twig>().Damage(this.transform);
+                    hitinfo.transform.GetComponent<Twig>().Damage(transform);
+                }
+                else if (hitinfo.transform.tag == "Tree")
+                {
+                    hitinfo.transform.GetComponent<Tree>().Damage(hitinfo.point, transform.eulerAngles.y);
                 }
                 isSwing = false;
-                Debug.Log(hitinfo.transform.name);
             }
             yield return null;
         }

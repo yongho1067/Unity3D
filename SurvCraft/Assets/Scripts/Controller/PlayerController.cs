@@ -57,14 +57,18 @@ public class PlayerController : MonoBehaviour
         originPosY = mainCamera.transform.localPosition.y;
     }
 
-    void Update()
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Update()
     {
         #region Movement
         IsTouchingGround();
         TryJump();
         TryRun();
         TryCrouch();
-        Move();
         MoveCheck();
         #endregion
 
