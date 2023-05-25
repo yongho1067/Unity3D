@@ -150,10 +150,10 @@ public class Twig : MonoBehaviour
     {
         SoundManager.soundManager.PlaySE(brokenSound);
 
-        GameObject instance = Instantiate(little_Twig, gameObject.GetComponent<BoxCollider>().bounds.center + (Vector3.up * 0.5f),
+        GameObject instance = Instantiate(little_Twig, gameObject.GetComponent<BoxCollider>().bounds.center + (Vector3.up * 0.6f),
             Quaternion.identity, effectTemp.transform);
 
-        GameObject instance2 = Instantiate(little_Twig, gameObject.GetComponent<BoxCollider>().bounds.center - (Vector3.up * 0.5f),
+        GameObject instance2 = Instantiate(little_Twig, gameObject.GetComponent<BoxCollider>().bounds.center - (Vector3.up * 0.4f),
             Quaternion.identity, effectTemp.transform);
 
         Destroy(gameObject);

@@ -65,12 +65,14 @@
     <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Controller\CloseWeaponController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
+    <Compile Include="Assets\Scripts\Enviroment\Grass.cs" />
     <Compile Include="Assets\Scripts\Weapons\CloseWeapon.cs" />
+    <Compile Include="Assets\Scripts\Enviroment\Twig.cs" />
     <Compile Include="Assets\Scripts\Controller\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
-    <Compile Include="Assets\Scripts\Controller\HandController.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\Enviroment\Twig.cs" />
+    <Compile Include="Assets\Scripts\Controller\HandController.cs" />
+    <Compile Include="Assets\Scripts\Enviroment\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

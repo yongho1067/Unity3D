@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 4327802951465192}
   - component: {fileID: 65701806359583512}
   - component: {fileID: 54361653529674344}
+  - component: {fileID: 7638131721890147687}
   m_Layer: 0
   m_Name: Grass
   m_TagString: Grass
@@ -139,7 +140,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051431355133318}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -495.47006, y: -312.89743, z: -19.926907}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -190,6 +191,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7638131721890147687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051431355133318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9684e441f6c78574f970ec4e23c01dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  destroyTime: 3
+  force: 0.05
+  hit_effect_prefab: {fileID: 7073227573908936548, guid: ae25c651fd746644291c3ee8ffc649e8, type: 3}
+  hit_Sound: Twig_Hit
 --- !u!1 &1062555848992376
 GameObject:
   m_ObjectHideFlags: 0

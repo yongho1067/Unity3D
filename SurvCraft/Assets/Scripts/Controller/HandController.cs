@@ -27,6 +27,11 @@ public class HandController : CloseWeaponController
         {
             if (CheckObject())
             {
+                if(hitinfo.transform.tag == "Grass")
+                {
+                    hitinfo.transform.GetComponent<Grass>().Damage();
+                }
+
                 isSwing = false;
                 Debug.Log(hitinfo.transform.name);
             }
