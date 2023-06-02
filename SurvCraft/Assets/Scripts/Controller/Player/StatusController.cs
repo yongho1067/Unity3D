@@ -70,6 +70,7 @@ public class StatusController : MonoBehaviour
         RechargingStamina();
     }
 
+    #region 배고픔 관련
     private void Hungry()
     {
         if(currentHungry > 0)
@@ -86,10 +87,37 @@ public class StatusController : MonoBehaviour
         }
         else
         {
+            currentHungry = 0;
             Debug.Log("배고픔 수치가 0이 되었습니다.");
         }
     }
 
+    public void IncreaseHungry(int count)
+    {
+        if (currentHungry + count < hungry)
+        {
+            currentHungry += count;
+        }
+        else
+        {
+            currentHungry = hungry;
+        }
+    }
+
+    public void DecreaseHungry(int count)
+    {
+        if(currentHungry - count < 0)
+        {
+            currentHungry = 0;
+        }
+        else
+        { 
+            currentHungry -= count;
+        }
+    }
+    #endregion
+
+    #region 목마름 관련
     private void Thirsty()
     {
         if (currentThirsty > 0)
@@ -106,9 +134,35 @@ public class StatusController : MonoBehaviour
         }
         else
         {
+            currentThirsty = 0;
             Debug.Log("목마름 수치가 0이 되었습니다.");
         }
     }
+    public void IncreaseThirsty(int count)
+    {
+        if (currentThirsty + count < thirsty)
+        {
+            currentThirsty += count;
+        }
+        else
+        {
+            currentThirsty = thirsty;
+        }
+    }
+
+    public void DecreaseThirsty(int count)
+    {
+        if (currentThirsty - count < 0)
+        {
+            currentThirsty = 0;
+        }
+        else
+        {
+            currentThirsty -= count;
+        }
+    }
+
+    #endregion
 
     private void GaugeUpdate()
     {
@@ -120,6 +174,66 @@ public class StatusController : MonoBehaviour
         status[SATISFY].fillAmount = (float)currentSatisfy / satisfy;
     }
 
+    #region HP 관련
+    public void IncreaseHP(int count)
+    {
+        if(currentHp + count < hp)
+        {
+            currentHp += count;
+        }
+        else
+        {
+            currentHp = hp;
+        }
+    }
+
+    /// <summary>
+    /// 방어력이 우선 적으로 차감되도록
+    /// </summary>
+    public void DecreaseHP(int count)
+    {
+        if(currentDp > 0)
+        {
+            DecreaseDP(count);
+            return;
+        }
+
+        currentHp -= count;
+
+        if(currentHp <= 0)
+        {
+            currentHp = 0;
+            Debug.Log("캐릭터의 HP가 0이 되었습니다.");
+        }
+    }
+    #endregion
+
+    #region DP (방어력) 관련
+    public void IncreaseDP(int count)
+    {
+        if(currentDp + count < dp)
+        {
+            currentDp += count;
+        }
+        else
+        {
+            currentDp = dp;
+        }
+    }
+
+    public void DecreaseDP(int count)
+    {
+        currentDp -= count;
+
+        if(currentDp <= 0)
+        {
+            currentDp = 0;
+            Debug.Log("캐릭터의 DP가 0이 되었습니다.");
+        }
+    }
+    #endregion
+
+    #region 스태미너 관련
     public void DecreaseStamina(int count)
     {
         spUsed = true;
@@ -133,6 +247,12 @@ public class StatusController : MonoBehaviour
         {
             currentSp = 0;
         }
+    }
+
+    public int GetCurrentSP() 
+    {
+        return currentSp;
+    
     }
 
     private void RechargingStamina()
@@ -163,4 +283,5 @@ public class StatusController : MonoBehaviour
             currentSp += increaseSpeedSp;
         }
     }
+    #endregion
 }

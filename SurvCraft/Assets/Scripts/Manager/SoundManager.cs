@@ -83,6 +83,7 @@ public class SoundManager : MonoBehaviour
             if (name == bgmSounds[i].name)
             {
                 audioSourceBGM.clip = bgmSounds[i].clip;
+                audioSourceBGM.volume = 0.2f;
                 audioSourceBGM.Play();
                 return;
             }

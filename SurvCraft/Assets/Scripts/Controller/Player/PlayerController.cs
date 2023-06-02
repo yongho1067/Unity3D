@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void TryJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround && statusController.GetCurrentSP() > 0)
         {
             Jump();
         }
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         // 앉은 상태에서 점프시 앉은 상태 해제
         if (isCrouch)
             Crouch();
-        statusController.DecreaseStamina(100);
+        statusController.DecreaseStamina(400);
         myRigidbody.velocity = transform.up * jumpForce; 
     }
     #endregion
@@ -171,12 +171,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && statusController.GetCurrentSP() > 0)
         {
             Running();
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || statusController.GetCurrentSP() <= 0)
         {
             RunningCancel();
         }
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
         isRun = true;
 
         crosshair.RunningAnimation(isRun);
-        statusController.DecreaseStamina(1);
+        statusController.DecreaseStamina(2);
         applySpeed = runSpeed;
     }
 

@@ -124,6 +124,7 @@ public class GunController : MonoBehaviour
     private void PlaySE(AudioClip clip)
     {
         audioSource.clip = clip;
+        audioSource.volume = 0.1f;
         audioSource.Play();
     }
     #endregion
