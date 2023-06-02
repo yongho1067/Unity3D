@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private GunController gunController;
     private Crosshair crosshair;
+    private StatusController statusController;
 
     // 임시 실행 bgm
     [SerializeField] private string bgm_Sound;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         gunController = FindObjectOfType<GunController>();
         crosshair = FindObjectOfType<Crosshair>();
+        statusController = FindObjectOfType<StatusController>();
 
         SoundManager.soundManager.PlayBGM(bgm_Sound);
 
@@ -158,7 +160,7 @@ public class PlayerController : MonoBehaviour
         // 앉은 상태에서 점프시 앉은 상태 해제
         if (isCrouch)
             Crouch();
-
+        statusController.DecreaseStamina(100);
         myRigidbody.velocity = transform.up * jumpForce; 
     }
     #endregion
@@ -191,6 +193,7 @@ public class PlayerController : MonoBehaviour
         isRun = true;
 
         crosshair.RunningAnimation(isRun);
+        statusController.DecreaseStamina(1);
         applySpeed = runSpeed;
     }
 
