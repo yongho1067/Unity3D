@@ -274,12 +274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a658b588ab07af4dbe3c7fcd2a2de49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropItemcount: 5
   hp: 3
   destroyTime: 2
   sphereCollider: {fileID: 135408175999592926}
   normalRock: {fileID: 1058984482318840}
   brokenRock: {fileID: 1250347228470548}
   effect_Prefab: {fileID: 3652541767866642250, guid: af613fa543c605043aa659389c87dabd, type: 3}
+  rock_item_Prefab: {fileID: 9468697432401506, guid: 9afb2edb78d2afe44aa6614f38c8706e, type: 3}
   effect_Prefabs_Temp: {fileID: 0}
   strike_Sound: Pickaxe_Strike
   destroy_Sound: Rock_Destroy

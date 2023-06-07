@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
+    // 아이템 드랍 갯수
+    [SerializeField] private int dropItemcount;
     // 바위의 체력
     [SerializeField] private int hp;
 
@@ -19,6 +21,8 @@ public class Rock : MonoBehaviour
     [SerializeField] private GameObject brokenRock;
     // 채굴 이펙트
     [SerializeField] private GameObject effect_Prefab;
+    // 드랍될 아이템
+    [SerializeField] private GameObject rock_item_Prefab;
     // 채굴 이펙트 하이라키 보관함
     [SerializeField] private GameObject effect_Prefabs_Temp;
 
@@ -51,6 +55,12 @@ public class Rock : MonoBehaviour
         SoundManager.soundManager.PlaySE(destroy_Sound);
 
         sphereCollider.enabled = false;
+
+        for(int i = 0; i < dropItemcount; i++)
+        {
+            Instantiate(rock_item_Prefab, normalRock.transform.position, Quaternion.identity, effect_Prefabs_Temp.transform);
+        }
+
         Destroy(normalRock);
 
         brokenRock.SetActive(true);

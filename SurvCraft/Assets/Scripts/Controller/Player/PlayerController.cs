@@ -75,8 +75,11 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Camera
-        CameraRotation();
-        CharacterRotation();
+        if (!Inventory.inventoryActivated)
+        {
+            CameraRotation();
+            CharacterRotation();
+        }
         #endregion
     }
 

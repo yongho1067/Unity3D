@@ -366,6 +366,9 @@
 "Assets/Scripts/Manager/WeaponManager.cs"
 "Assets/Scripts/UI/Crosshair.cs"
 "Assets/Scripts/UI/HUD.cs"
+"Assets/Scripts/UI/Inventory/DragSlot.cs"
+"Assets/Scripts/UI/Inventory/Inventory.cs"
+"Assets/Scripts/UI/Inventory/ItemSlot.cs"
 "Assets/Scripts/Weapons/CloseWeapon.cs"
 "Assets/Scripts/Weapons/Gun.cs"
 -langversion:9.0

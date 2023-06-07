@@ -20,21 +20,25 @@ public abstract class CloseWeaponController : MonoBehaviour
     /// </summary>
     protected void TryAttack()
     {
-        if (Input.GetButton("Fire1")) // ÁÂÅ¬¸¯
+        if (!Inventory.inventoryActivated)
         {
-            if (!isAttack)
+            if (Input.GetButton("Fire1")) // ÁÂÅ¬¸¯
             {
-                if (CheckObject())
+                if (!isAttack)
                 {
-                    if (currentCloseWeapon.isAxe && hitinfo.transform.tag == "Tree")
+                    if (CheckObject())
                     {
-                        StartCoroutine(AttackCoroutine("Hit_Tree", currentCloseWeapon.workAble, currentCloseWeapon.workUnable, currentCloseWeapon.workDelay));
-                        return;
+                        if (currentCloseWeapon.isAxe && hitinfo.transform.tag == "Tree")
+                        {
+                            StartCoroutine(AttackCoroutine("Hit_Tree", currentCloseWeapon.workAble, currentCloseWeapon.workUnable, currentCloseWeapon.workDelay));
+                            return;
+                        }
                     }
+                    StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackAble, currentCloseWeapon.attackUnable, currentCloseWeapon.attackDelay));
                 }
-                StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackAble, currentCloseWeapon.attackUnable, currentCloseWeapon.attackDelay));
             }
         }
+ 
     }
 
     /// <summary>

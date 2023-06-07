@@ -18,6 +18,7 @@ public class ActionController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     [SerializeField] private TextMeshProUGUI actionText;
+    [SerializeField] private Inventory inventory;
     private int randomSound;
 
 
@@ -72,6 +73,7 @@ public class ActionController : MonoBehaviour
                 randomSound = (int)Random.Range(1, 9);
                 SoundManager.soundManager.PlaySE("PickUpSound" + randomSound);
                 Debug.Log(hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " È¹µæ ");
+                inventory.AcquireItem(hitinfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitinfo.transform.gameObject);
                 IteminfoDisappear();
             }

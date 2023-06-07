@@ -60,23 +60,26 @@
     <Compile Include="Assets\Scripts\Controller\Weapon\AxeController.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\GunController.cs" />
     <Compile Include="Assets\Scripts\UI\HUD.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Rock.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Tree.cs" />
     <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\StatusController.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\CloseWeaponController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Player\ActionController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Grass.cs" />
     <Compile Include="Assets\Scripts\Weapons\CloseWeapon.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemPickUp.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Twig.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\HandController.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
-    <Compile Include="Assets\Scripts\Item\ItemPickUp.cs" />
-    <Compile Include="Assets\Scripts\Controller\Player\ActionController.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\DragSlot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
