@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef8c2aae1b4c2446ac9e08224b2c794, type: 3}
   m_Name: Leaf_Item
   m_EditorClassIdentifier: 
-  itemName: "\uB098\uBB47\uC78E"
+  itemName: "\uC7A1\uCD08"
   itemImage: {fileID: 21300000, guid: 07be94eb481036d4ab01f7921118563c, type: 3}
   itemPrefab: {fileID: 4569356729396516897, guid: 32b00268597b5a343816fede5420f5e2, type: 3}
+  itemDesc: "\uC794\uB514\uC5D0\uC11C \uB5A8\uC5B4\uC838 \uB098\uC628 \uC7A1\uCD08"
   weaponType: 
   itemType: 2

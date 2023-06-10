@@ -9,6 +9,7 @@ public class Item : ScriptableObject
     public string itemName;
     public Sprite itemImage;
     public GameObject itemPrefab;
+    [TextArea] public string itemDesc; // 아이템의 설명
 
     // 무기 유형
     public string weaponType;

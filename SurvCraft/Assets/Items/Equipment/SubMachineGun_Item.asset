@@ -15,5 +15,6 @@ MonoBehaviour:
   itemName: "\uC11C\uBE0C\uBA38\uC2E0\uAC741"
   itemImage: {fileID: 21300000, guid: f05173efce60add4fa11e15cf9f020d2, type: 3}
   itemPrefab: {fileID: 875441792050458768, guid: 4f508f2c7631ad743a1c1cb1ccd4047a, type: 3}
+  itemDesc: "\uAE30\uBCF8\uC801\uC778 \uC11C\uBE0C\uBA38\uC2E0\uAC74"
   weaponType: GUN
   itemType: 0

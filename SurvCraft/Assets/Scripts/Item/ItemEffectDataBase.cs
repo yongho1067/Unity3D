@@ -10,6 +10,17 @@ public class ItemEffectDataBase : MonoBehaviour
 
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private StatusController statusController;
+    [SerializeField] private SlotToolTip slotToolTip;
+
+    public void ShowToolTip(Item item, int count)
+    {
+        slotToolTip.ShowToolTip(item, count);
+    }
+    
+    public void HideToolTip()
+    {
+        slotToolTip.HideToolTip();
+    }
 
     public void UseItem(Item item)
     {

@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject slotParent;
     [SerializeField] private GameObject inputField;
 
+    [SerializeField] ItemEffectDataBase itemEffectDataBase;
+
     // ½½·Ôµé
     private ItemSlot[] slots;
      
@@ -37,6 +39,7 @@ public class Inventory : MonoBehaviour
             else
             {
                 CloseInventory();
+                itemEffectDataBase.HideToolTip();
             }
         }
     }
