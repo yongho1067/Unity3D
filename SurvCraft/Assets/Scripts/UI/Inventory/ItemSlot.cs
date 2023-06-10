@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
@@ -19,11 +20,18 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     [SerializeField] private TextMeshProUGUI text_Count;
     [SerializeField] private GameObject countImage;
 
-    private WeaponManager weaponManager;
+
+    private ItemEffectDataBase itemEffectDataBase;
+    private Rect baseRect;
+    private InputNumber inputNumber;
 
     private void Start()    
     {
-        weaponManager = FindObjectOfType<WeaponManager>();
+        itemEffectDataBase = FindObjectOfType<ItemEffectDataBase>();
+                     // Inventory Base
+        baseRect = transform.parent.parent.GetComponent<RectTransform>().rect;
+        inputNumber = FindObjectOfType<InputNumber>();
+            
     }
 
     /// <summary>
@@ -46,16 +54,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         itemCount = count;
         itemImage.sprite = item.itemImage;
 
-        if (item.itemType != Item.ItemType.Equipment)
-        {
-            countImage.SetActive(true);
-            text_Count.text = itemCount.ToString();
-        }
-        else
-        {
-            text_Count.text = "0";
-            countImage.SetActive(false);
-        }
+        text_Count.text = "0";
+        countImage.SetActive(false);
+
         SetColor(1f);
     }
 
@@ -93,16 +94,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         {
             if(item != null)
             {
-                if(item.itemType == Item.ItemType.Equipment)
+                itemEffectDataBase.UseItem(item);
+                
+                if(item.itemType == Item.ItemType.Used)
                 {
-
-                    StartCoroutine(weaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-                }
-                else
-                {
-                    Debug.Log(item.itemName + "을 사용했습니다.");
                     SetSlotCount(-1);
-                }
+                }     
             }
         }
     }
@@ -128,9 +125,20 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     // 드래그가 끝났을 모든 경우
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
-        DragSlot.instance.SetColor(0f);
-        DragSlot.instance.itemSlot = null;       
+        // 인벤토리의 x의 최소값과 최대값 y의 최소값과 최대값을 구해서 인벤토리 영역을 벗어나는지 확인
+        if (DragSlot.instance.transform.localPosition.x < baseRect.xMin || DragSlot.instance.transform.localPosition.x > baseRect.xMax
+            || DragSlot.instance.transform.localPosition.y < baseRect.yMin || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        {
+            if(DragSlot.instance.itemSlot != null)
+            {
+                inputNumber.Call();
+            }
+        }
+        else
+        {
+            DragSlot.instance.SetColor(0f);
+            DragSlot.instance.itemSlot = null;
+        }            
     }
 
     // 다른 슬롯 위에서 드래그가 끝났을 경우

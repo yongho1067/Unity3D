@@ -132,6 +132,6 @@ MonoBehaviour:
   hp: 2
   destroyTime: 5
   hit_Effect_prefab: {fileID: 7073227573908936548, guid: ae25c651fd746644291c3ee8ffc649e8, type: 3}
-  little_Twig: {fileID: 6399762288490440087, guid: 442c1e1a237c4944bbb8b5e4c45983d0, type: 3}
+  little_Twig: {fileID: 6399762288490440087, guid: 99ad4d02a03d15d478cdf7aaf412b5f5, type: 3}
   hitSound: Twig_Hit
   brokenSound: Twig_Broken

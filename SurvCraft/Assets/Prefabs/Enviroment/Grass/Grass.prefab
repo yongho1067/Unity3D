@@ -207,6 +207,8 @@ MonoBehaviour:
   destroyTime: 3
   force: 0.05
   hit_effect_prefab: {fileID: 7073227573908936548, guid: ae25c651fd746644291c3ee8ffc649e8, type: 3}
+  item_Leaf: {fileID: 11400000, guid: d9ea7f3f15c11014481c43434479f700, type: 2}
+  leafCount: 3
   hit_Sound: Twig_Hit
   instance_TEMP: {fileID: 0}
 --- !u!1 &1062555848992376

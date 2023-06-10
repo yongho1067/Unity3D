@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         // 앉은 상태에서 점프시 앉은 상태 해제
         if (isCrouch)
             Crouch();
-        statusController.DecreaseStamina(400);
+        statusController.DecreaseStamina(300);
         myRigidbody.velocity = transform.up * jumpForce; 
     }
     #endregion

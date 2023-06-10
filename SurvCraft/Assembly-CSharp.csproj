@@ -59,10 +59,12 @@
     <Compile Include="Assets\Scripts\Effect\WeaponSway.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\AxeController.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\GunController.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\OnlyCanInt.cs" />
     <Compile Include="Assets\Scripts\UI\HUD.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Rock.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\DragSlot.cs" />
     <Compile Include="Assets\Scripts\Enviroment\Tree.cs" />
     <Compile Include="Assets\Scripts\Manager\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\StatusController.cs" />
@@ -75,11 +77,12 @@
     <Compile Include="Assets\Scripts\Enviroment\Twig.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InputNumber.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Controller\Weapon\HandController.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\DragSlot.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemEffectDataBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

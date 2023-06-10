@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private GameObject inventoryBase;
     [SerializeField] private GameObject slotParent;
+    [SerializeField] private GameObject inputField;
 
     // ½½·Ôµé
     private ItemSlot[] slots;
@@ -25,7 +26,7 @@ public class Inventory : MonoBehaviour
 
     private void TryOpenInventory()
     {
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
             inventoryActivated = !inventoryActivated;
 

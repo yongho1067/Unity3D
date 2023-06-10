@@ -234,6 +234,18 @@ public class StatusController : MonoBehaviour
     #endregion
 
     #region 스태미너 관련
+    public void IncreaseSP(int count)
+    {
+        if (currentSp + count < sp)
+        {
+            currentSp += count;
+        }
+        else
+        {
+            currentSp = sp;
+        }
+    }
+
     public void DecreaseStamina(int count)
     {
         spUsed = true;
