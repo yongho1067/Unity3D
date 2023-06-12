@@ -95,6 +95,8 @@ MonoBehaviour:
   itemImage: {fileID: 5321933506887660495}
   text_Count: {fileID: 5722135792165463887}
   countImage: {fileID: 5581621019918614334}
+  quickSlotBaseRect: {fileID: 0}
+  baseRect: {fileID: 0}
 --- !u!1 &3861538182530448334
 GameObject:
   m_ObjectHideFlags: 0

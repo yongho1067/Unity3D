@@ -20,18 +20,21 @@ public class ItemSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler, 
     [SerializeField] private TextMeshProUGUI text_Count;
     [SerializeField] private GameObject countImage;
 
+    [SerializeField] private bool isQuickSlot; // 퀵슬롯 여부 판단
+    [SerializeField] private int quickSlotNumber; // 퀵슬롯 번호
 
+
+    [SerializeField] private RectTransform quickSlotBaseRect; // 퀵슬롯의 영역
+    [SerializeField] private RectTransform baseRect; // 인벤토리의 영역
     private ItemEffectDataBase itemEffectDataBase;
-    private Rect baseRect;
     private InputNumber inputNumber;
+
 
 
 
     private void Start()    
     {
         itemEffectDataBase = FindObjectOfType<ItemEffectDataBase>();
-                     // Inventory Base
-        baseRect = transform.parent.parent.GetComponent<RectTransform>().rect;
         inputNumber = FindObjectOfType<InputNumber>();
             
     }
@@ -90,8 +93,13 @@ public class ItemSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler, 
         countImage.SetActive(false);
     }
 
+    public int GetQuickSlotNumber()
+    {
+        return quickSlotNumber;
+    }
 
 
+    #region 클릭 관련 함수
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Right)
@@ -129,29 +137,46 @@ public class ItemSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler, 
     // 드래그가 끝났을 모든 경우
     public void OnEndDrag(PointerEventData eventData)
     {
-        // 인벤토리의 x의 최소값과 최대값 y의 최소값과 최대값을 구해서 인벤토리 영역을 벗어나는지 확인
-        if (DragSlot.instance.transform.localPosition.x < baseRect.xMin || DragSlot.instance.transform.localPosition.x > baseRect.xMax
-            || DragSlot.instance.transform.localPosition.y < baseRect.yMin || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        // 인벤토리의 x의 최소값과 최대값 y의 최소값과 최대값을 구해서 인벤토리 영역을 벗어나는지 확인 -430 -500
+        if (!((DragSlot.instance.transform.localPosition.x > baseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < baseRect.rect.xMax
+           && DragSlot.instance.transform.localPosition.y > baseRect.rect.yMin && DragSlot.instance.transform.localPosition.y < baseRect.rect.yMax)
+           ||
+           (DragSlot.instance.transform.localPosition.x > quickSlotBaseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < quickSlotBaseRect.rect.xMax
+           && DragSlot.instance.transform.localPosition.y > quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMax && DragSlot.instance.transform.localPosition.y < quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMin)))
         {
-            if(DragSlot.instance.itemSlot != null)
+            if (DragSlot.instance.itemSlot != null)
             {
                 inputNumber.Call();
             }
         }
         else
         {
-            DragSlot.instance.SetColor(0f);
+            DragSlot.instance.SetColor(0);
             DragSlot.instance.itemSlot = null;
-        }            
+        }
     }
 
     // 다른 슬롯 위에서 드래그가 끝났을 경우
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
         if(DragSlot.instance.itemSlot != null)
         {
             ChangeSlot();
+
+            // 인벤토리에서 퀵슬롯으로 ( 혹은 퀵슬롯에서 퀵슬롯으로)
+            if (isQuickSlot)
+            {
+                // 활성화 된 퀵슬롯인지? 교체 작업
+                itemEffectDataBase.isActivatedQuickSlot(quickSlotNumber);
+            }
+            else // 인벤토리 -> 인벤토리, 퀵슬롯 -> 인벤토리
+            {
+                if (DragSlot.instance.itemSlot.isQuickSlot) // 퀵슬롯 -> 인벤토리
+                {
+                    // 활성화 된 퀵슬롯인지? 교체 작업
+                    itemEffectDataBase.isActivatedQuickSlot(DragSlot.instance.itemSlot.quickSlotNumber);
+                }
+            }
         }
     }
 
@@ -189,9 +214,5 @@ public class ItemSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler, 
     {
         itemEffectDataBase.HideToolTip();
     }
-
-    public int GetItemCount()
-    {
-        return itemCount;
-    }
+    #endregion
 }

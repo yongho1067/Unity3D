@@ -11,7 +11,16 @@ public class ItemEffectDataBase : MonoBehaviour
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private StatusController statusController;
     [SerializeField] private SlotToolTip slotToolTip;
+    [SerializeField] private QuickSlotController quickSlotController;
 
+    #region QuickSlot Â¡°Ë´Ù¸®
+    public void isActivatedQuickSlot(int num)
+    {
+        quickSlotController.isActivatedQuickSlot(num);
+    }
+    #endregion
+
+    #region SlootToolTip Â¡°Ë´Ù¸®
     public void ShowToolTip(Item item, int count)
     {
         slotToolTip.ShowToolTip(item, count);
@@ -21,6 +30,7 @@ public class ItemEffectDataBase : MonoBehaviour
     {
         slotToolTip.HideToolTip();
     }
+    #endregion
 
     public void UseItem(Item item)
     {

@@ -21,6 +21,7 @@ public class SlotToolTip : MonoBehaviour
 
         if (item.itemType == Item.ItemType.Equipment)
         {
+            itemCount_text.text = "";
             itemRightClick_text.text = "우클릭 - 장착";
         }
         else if (item.itemType == Item.ItemType.Used)

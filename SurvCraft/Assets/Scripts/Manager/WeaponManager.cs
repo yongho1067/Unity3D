@@ -70,7 +70,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    void Update()
+    /*void Update()
     {
         if (!isChangeWeapon)
         {
@@ -100,7 +100,7 @@ public class WeaponManager : MonoBehaviour
                 StartCoroutine(ChangeWeaponCoroutine("PICKAXE", "곡괭이"));
             }
         }
-    }
+    }*/
 
     /// <summary>
     /// 무기 교체 코루틴
