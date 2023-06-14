@@ -10,6 +10,7 @@ TagManager:
   - Grass
   - Item
   - Terrain
+  - NPC
   layers:
   - Default
   - TransparentFX
