@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    static public bool isActivated = true;
+
     #region Camera
     [Header("카메라 설정")]
     [SerializeField] private Camera mainCamera;
@@ -61,26 +63,33 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (isActivated)
+        {
+            Move();
+        }
     }
 
     private void Update()
     {
-        #region Movement
-        IsTouchingGround();
-        TryJump();
-        TryRun();
-        TryCrouch();
-        MoveCheck();
-        #endregion
-
-        #region Camera
-        if (!Inventory.inventoryActivated)
+        if(isActivated)
         {
-            CameraRotation();
-            CharacterRotation();
+            #region Movement
+            IsTouchingGround();
+            TryJump();
+            TryRun();
+            TryCrouch();
+            MoveCheck();
+            #endregion
+
+            #region Camera
+            if (!Inventory.inventoryActivated)
+            {
+                CameraRotation();
+                CharacterRotation();
+            }
+            #endregion
         }
-        #endregion
+
     }
 
     #region Crouch
@@ -281,4 +290,18 @@ public class PlayerController : MonoBehaviour
         myRigidbody.MoveRotation(myRigidbody.rotation * Quaternion.Euler(characterRotationY));
     }
     #endregion
+
+    // 상태 변수 값 반환
+    public bool GetRun()
+    {
+        return isRun;
+    }
+    public bool GetWalk()
+    {
+        return isWalk;
+    }
+    public bool GetCrouch()
+    {
+        return isCrouch;
+    }
 }

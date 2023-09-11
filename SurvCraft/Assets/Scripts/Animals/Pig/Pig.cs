@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pig : MonoBehaviour
+public class Pig : WeakAnimal
 {
+    /*
     [SerializeField] private string animalName;
     [SerializeField] private int hp;
 
@@ -41,6 +42,7 @@ public class Pig : MonoBehaviour
     [SerializeField] private AudioClip[] pig_audioClips_normal;
     [SerializeField] private AudioClip pig_audioClip_hurt;
     [SerializeField] private AudioClip pig_audioClip_dead;
+    
 
     private void Start()
     {
@@ -149,7 +151,7 @@ public class Pig : MonoBehaviour
         }
     }
 
-    private void Run(Vector3 targetPos)
+    public void Run(Vector3 targetPos)
     {
         applySpeed = runSpeed;
 
@@ -233,6 +235,75 @@ public class Pig : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.Play();
+    }
+    */
+
+    protected override void Update()
+    {
+        base.Update();   
+        if(fieldOfViewAngle.View() && !isDead)
+        {
+            Run(fieldOfViewAngle.GetTargetPos());
+        }
+    }
+
+    protected override void ResetAction()
+    {
+        base.ResetAction();
+        RandomAction();
+    }
+
+    private void RandomAction()
+    {
+        RandomSound();
+        isAction = true;
+
+        // 대기, 풀뜯기, 두리번, 걷기
+        int random = Random.Range(0, 4); // 최소 값 포함 최대값 미포함
+
+        Pig_RandomAction(random);
+    }
+
+    public void Pig_RandomAction(int random)
+    {
+        if (random < 3)
+        {
+            currentTime = idleTime;
+        }
+        else if (random >= 3)
+        {
+            currentTime = walkTime;
+        }
+
+        if (random == 0)
+        {
+            Debug.Log("대기");
+        }
+        else if (random == 1)
+        {
+            Debug.Log("풀뜯기");
+            anim.SetTrigger("Eat");
+        }
+        else if (random == 2)
+        {
+            Debug.Log("두리번");
+            anim.SetTrigger("Peek");
+        }
+        else if (random == 3)
+        {
+            isWalking = true;
+            Debug.Log("걷기");
+            nav.speed = walkSpeed;
+            anim.SetBool("Walking", isWalking);
+
+        }
+    }
+
+    public Item GetItem()
+    {
+        this.gameObject.tag = "Untagged";
+        Destroy(this.gameObject, 3f);
+        return item_Prefab;
     }
 
 }

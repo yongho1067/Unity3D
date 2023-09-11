@@ -34,6 +34,8 @@ public class GunController : MonoBehaviour
 
     private Crosshair crosshair;
 
+    [SerializeField] private LayerMask layerMask;
+
 
 
     private void Awake()
@@ -256,7 +258,7 @@ public class GunController : MonoBehaviour
         if(Physics.Raycast(camera.transform.position, camera.transform.forward + // x축 랜덤 , y축 랜덤 반동 + 총의 기존반동
             new Vector3(Random.Range(-crosshair.GetAccuracy() - currentGun.accuracy, crosshair.GetAccuracy() + currentGun.accuracy),
                         Random.Range(-crosshair.GetAccuracy() - currentGun.accuracy, crosshair.GetAccuracy() + currentGun.accuracy), 0f) 
-            , out hitinfo, currentGun.range))
+            , out hitinfo, currentGun.range, layerMask))
         {
             // hitinfo.point => hit 이벤트가 발생한 오브젝트의 좌표
             // hitinfo.normal => 충돌한 객체의 표면

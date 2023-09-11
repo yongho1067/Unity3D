@@ -49,10 +49,15 @@ public class HandController : CloseWeaponController
                 {
                     hitinfo.transform.GetComponent<Grass>().Damage();
                 }
-                else if (hitinfo.transform.tag == "NPC")
+                else if (hitinfo.transform.tag == "WeakAnimal")
                 {
                     SoundManager.soundManager.PlaySE("Animal_Hit");
-                    hitinfo.transform.GetComponent<Pig>().Damage(1, transform.position);
+                    hitinfo.transform.GetComponent<WeakAnimal>().Damage(1, transform.position);
+                }else if (hitinfo.transform.tag == "StrongAnimal")
+                {
+                    SoundManager.soundManager.PlaySE("Animal_Hit");
+                    // StrongAnimal 스크립트 생성시 교체
+                    hitinfo.transform.GetComponent<WeakAnimal>().Damage(1, transform.position);
                 }
 
                 isSwing = false;

@@ -61,13 +61,17 @@
     <Compile Include="Assets\Scripts\Controllers\Weapon\GunController.cs" />
     <Compile Include="Assets\Scripts\Controllers\UI\QuickSlotController.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\OnlyCanInt.cs" />
+    <Compile Include="Assets\Scripts\Animals\WeakAnimal.cs" />
     <Compile Include="Assets\Scripts\UIs\HUD\HUD.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Animals\Animal.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Animals\StrongAnimal.cs" />
     <Compile Include="Assets\Scripts\Items\ItemEffectDataBase.cs" />
     <Compile Include="Assets\Scripts\Enviroments\Rock.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\DragSlot.cs" />
     <Compile Include="Assets\Scripts\Enviroments\Tree.cs" />
+    <Compile Include="Assets\Scripts\Animals\Pig\WildPig.cs" />
     <Compile Include="Assets\Scripts\Managers\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\StatusController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\CloseWeaponController.cs" />

@@ -10,7 +10,8 @@ TagManager:
   - Grass
   - Item
   - Terrain
-  - NPC
+  - WeakAnimal
+  - StrongAnimal
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - UI
   - Weapon
   - Item
-  - 
-  - 
+  - Player
+  - Animal
   - 
   - 
   - 

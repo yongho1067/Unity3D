@@ -15,6 +15,8 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected RaycastHit hitinfo;
 
+    [SerializeField] protected LayerMask layerMask;
+
     /// <summary>
     /// 좌클릭시 공격
     /// </summary>
@@ -74,7 +76,7 @@ public abstract class CloseWeaponController : MonoBehaviour
     /// </summary>
     protected bool CheckObject()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range, layerMask))
         {
             return true;
         }

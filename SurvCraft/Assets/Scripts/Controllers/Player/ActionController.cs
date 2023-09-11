@@ -9,7 +9,9 @@ public class ActionController : MonoBehaviour
     [SerializeField] private float range;
 
     // 습득 가능할 시 true;
-    private bool pickupActivated = false;
+    private bool pickupActivated = false; // 습득 가능할 시
+    private bool dissolveActivated = false; // 고기 해체 가능할 시
+    private bool isDissolving = false; // 고기 해체 중에는 true
 
     // 충돌체 정보 저장
     private RaycastHit hitinfo;
@@ -19,17 +21,21 @@ public class ActionController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI actionText;
     [SerializeField] private Inventory inventory;
+    [SerializeField] WeaponManager weaponManager;
+    [SerializeField] private Transform tf_MeatDissolveTool; // 고기 해체 툴
     private int randomSound;
 
     [SerializeField] QuickSlotController quickSlotController;
 
+    [SerializeField] private string sound_meat; // 소리재생
+
 
     private void Update()
     {
-        CheckItem();  
+        CheckAction();  
     }
 
-    private void CheckItem()
+    private void CheckAction()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitinfo, range, layerMask))
         {
@@ -38,10 +44,22 @@ public class ActionController : MonoBehaviour
                 TryAction();
                 IteminfoAppear();
             }
+            else if(hitinfo.transform.tag == "WeakAnimal" || hitinfo.transform.tag == "StrongAnimal")
+            {
+                MeatinfoAppear();
+                TryAction();
+                //Debug.Log("hitinfo.transform.tag == \"WeakAnimal\" || hitinfo.transform.tag == \"StrongAnimal\"");
+            }
+            else
+            {
+                InfoDisappear();
+            }
+
+            //Debug.Log(hitinfo.transform.tag);
         }
         else
         {
-            IteminfoDisappear();
+            InfoDisappear();
         }
     }
 
@@ -52,9 +70,21 @@ public class ActionController : MonoBehaviour
         actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow>" + "(F)" + "</color>";
     }
 
-    private void IteminfoDisappear()
+    private void MeatinfoAppear()
+    {
+        if (hitinfo.transform.GetComponent<Pig>().isDead)
+        {
+            //Debug.Log("hitinfo.transform.GetComponent<Animal>().isDead");
+            dissolveActivated = true;
+            actionText.gameObject.SetActive(true);
+            actionText.text = hitinfo.transform.GetComponent<Pig>().animalName + " 해체하기 " + "<color=yellow>" + "(F)" + "</color>";
+        }
+    }
+
+    private void InfoDisappear()
     {
         pickupActivated = false;
+        dissolveActivated = false;
         actionText.gameObject.SetActive(false);
     }
 
@@ -63,6 +93,7 @@ public class ActionController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             PickUp();
+            CanMeat();
         }
     }
 
@@ -77,9 +108,56 @@ public class ActionController : MonoBehaviour
                 Debug.Log(hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 ");
                 inventory.AcquireItem(hitinfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitinfo.transform.gameObject);
-                IteminfoDisappear();
+                InfoDisappear();
                 quickSlotController.ResetAppear();
             }
         }
+    }
+
+    private void CanMeat()
+    {
+        Debug.Log(dissolveActivated);
+        if(dissolveActivated)
+        {
+            if((hitinfo.transform.tag == "WeakAnimal" || hitinfo.transform.tag == "StrongAnimal") && hitinfo.transform.GetComponent<Pig>().isDead && !isDissolving)
+            {
+                isDissolving = true;
+                InfoDisappear();
+
+                // 고기 해체 실시
+                StartCoroutine(MeatCoroutine());
+            }
+                
+        }
+    }
+
+    IEnumerator MeatCoroutine()
+    {
+        WeaponManager.isChangeWeapon = true;
+        WeaponManager.currentWeaponAnim.SetTrigger("Weapon_Out");
+        PlayerController.isActivated = false;
+        WeaponSway.isActivated = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        WeaponManager.currentWeapon.gameObject.SetActive(false);
+        tf_MeatDissolveTool.gameObject.SetActive(true);
+
+
+
+        yield return new WaitForSeconds(0.2f);
+        SoundManager.soundManager.PlaySE(sound_meat);
+        yield return new WaitForSeconds(1.8f);
+
+        inventory.AcquireItem(hitinfo.transform.GetComponent<Pig>().GetItem(), hitinfo.transform.GetComponent<Pig>().itemNumber);
+
+        WeaponManager.currentWeapon.gameObject.SetActive(true);
+        tf_MeatDissolveTool.gameObject.SetActive(false);
+
+        PlayerController.isActivated = true;
+        WeaponSway.isActivated = true;
+        WeaponManager.isChangeWeapon = false;
+        isDissolving = false;
+
     }
 }
