@@ -9,9 +9,10 @@ public class ActionController : MonoBehaviour
     [SerializeField] private float range;
 
     // 습득 가능할 시 true;
-    private bool pickupActivated = false; // 습득 가능할 시
+    private bool pickupActivated = false; // 아이템 습득 가능할 시
     private bool dissolveActivated = false; // 고기 해체 가능할 시
     private bool isDissolving = false; // 고기 해체 중에는 true
+    private bool fireLookActivated = false; // 불을 근접해서 바라 볼 시 true
 
     // 충돌체 정보 저장
     private RaycastHit hitinfo;
@@ -30,6 +31,7 @@ public class ActionController : MonoBehaviour
     [SerializeField] private string sound_meat; // 소리재생
 
 
+
     private void Update()
     {
         CheckAction();  
@@ -39,22 +41,24 @@ public class ActionController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitinfo, range, layerMask))
         {
-            if(hitinfo.transform.tag == "Item")
+            TryAction();
+            if (hitinfo.transform.tag == "Item")
             {
-                TryAction();
                 IteminfoAppear();
             }
             else if(hitinfo.transform.tag == "WeakAnimal" || hitinfo.transform.tag == "StrongAnimal")
             {
                 MeatinfoAppear();
-                TryAction();
                 //Debug.Log("hitinfo.transform.tag == \"WeakAnimal\" || hitinfo.transform.tag == \"StrongAnimal\"");
+            }
+            else if(hitinfo.transform.tag == "Fire")
+            {  
+                FireInfoAppear();
             }
             else
             {
                 InfoDisappear();
             }
-
             //Debug.Log(hitinfo.transform.tag);
         }
         else
@@ -63,8 +67,16 @@ public class ActionController : MonoBehaviour
         }
     }
 
+    private void Reset()
+    {
+        pickupActivated = false;
+        dissolveActivated = false;
+        fireLookActivated = false;
+    }
+
     private void IteminfoAppear()
     {
+        Reset();
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
         actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow>" + "(F)" + "</color>";
@@ -74,6 +86,7 @@ public class ActionController : MonoBehaviour
     {
         if (hitinfo.transform.GetComponent<Pig>().isDead)
         {
+            Reset();
             //Debug.Log("hitinfo.transform.GetComponent<Animal>().isDead");
             dissolveActivated = true;
             actionText.gameObject.SetActive(true);
@@ -81,10 +94,23 @@ public class ActionController : MonoBehaviour
         }
     }
 
+    private void FireInfoAppear()
+    {
+        Reset();
+        fireLookActivated = true;
+
+        if (hitinfo.transform.GetComponent<Fire>().GetisFire())
+        {
+            actionText.gameObject.SetActive(true);
+            actionText.text = " 선택된 아이템 불에 넣기" + "<color=yellow>" + "(F)" + "</color>";
+        }
+    }
+
     private void InfoDisappear()
     {
         pickupActivated = false;
         dissolveActivated = false;
+        fireLookActivated = false;
         actionText.gameObject.SetActive(false);
     }
 
@@ -94,6 +120,8 @@ public class ActionController : MonoBehaviour
         {
             PickUp();
             CanMeat();
+            CanDropFire();
+            //Debug.Log(fireLookActivated);
         }
     }
 
@@ -158,6 +186,41 @@ public class ActionController : MonoBehaviour
         WeaponSway.isActivated = true;
         WeaponManager.isChangeWeapon = false;
         isDissolving = false;
+
+    }
+
+    private void CanDropFire()
+    {
+        if(fireLookActivated)
+        {
+            if (hitinfo.transform.tag == "Fire" && hitinfo.transform.GetComponent<Fire>().GetisFire())
+            {
+                // 손에 들고있는 아이템을 불에 넣음 == 선택된 퀵슬롯의 아이템 ( NULL )판별 필요
+                ItemSlot _selectedSlot = quickSlotController.GetSelectedSlot();
+
+                if(_selectedSlot.item != null)
+                {
+                    DropAnItem(_selectedSlot);
+                }
+            }
+        }
+    }
+
+    private void DropAnItem(ItemSlot _selectedSlot)
+    {
+        switch (_selectedSlot.item.itemType)
+        {
+            case Item.ItemType.Used:
+                if(_selectedSlot.item.itemName.Contains("고기")) // 문자열에 포함되있는 글자를 확인해줌
+                {
+                    Instantiate(_selectedSlot.item.itemPrefab, hitinfo.transform.position + Vector3.up, Quaternion.identity);
+                    quickSlotController.DecreaseSelectedItem();
+                }
+                break;
+            case Item.ItemType.Ingredient:
+                break;
+
+        }
 
     }
 }

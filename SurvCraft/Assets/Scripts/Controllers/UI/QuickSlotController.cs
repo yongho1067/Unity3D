@@ -227,7 +227,7 @@ public class QuickSlotController : MonoBehaviour
         handItem.transform.SetParent(itemPos);
     }
 
-    public void Eatitem()
+    public void DecreaseSelectedItem()
     {
         CoolTimeReset();
         ResetAppear();
@@ -243,6 +243,11 @@ public class QuickSlotController : MonoBehaviour
     public bool GetisCoolTime()
     {
         return isCoolTime;
+    }
+
+    public ItemSlot GetSelectedSlot()
+    {
+        return quickSlots[selectedSlot];
     }
 
 

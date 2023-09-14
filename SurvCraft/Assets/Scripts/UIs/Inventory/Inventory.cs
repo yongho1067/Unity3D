@@ -20,6 +20,9 @@ public class Inventory : MonoBehaviour
     private ItemSlot[] slots;
     private ItemSlot[] quickSlots;
 
+    [SerializeField] private QuickSlotController quickSlotController;
+    private int slotNum;
+
     void Start()
     {
         slots = slotParent.GetComponentsInChildren<ItemSlot>();
@@ -63,6 +66,10 @@ public class Inventory : MonoBehaviour
     public void AcquireItem(Item item, int count = 1)
     {
         PutSlot(quickSlots, item, count);
+        if(!isNotPut)
+        {
+            quickSlotController.isActivatedQuickSlot(slotNum);
+        }
 
         // 인벤토리 채우기
         if (isNotPut)
@@ -80,12 +87,14 @@ public class Inventory : MonoBehaviour
     {
         if (Item.ItemType.Equipment != item.itemType)
         {
+
             for (int i = 0; i < slots.Length; i++)
             {
                 if (slots[i].item != null)
                 {
                     if (slots[i].item.itemName == item.itemName)
                     {
+                        slotNum = i;
                         slots[i].SetSlotCount(count);
                         isNotPut = false;
                         return;
