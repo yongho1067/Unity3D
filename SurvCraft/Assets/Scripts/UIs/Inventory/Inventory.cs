@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
 
     private void TryOpenInventory()
     {
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
         {
             inventoryActivated = !inventoryActivated;
 
@@ -116,5 +116,56 @@ public class Inventory : MonoBehaviour
         }
 
         isNotPut = true;
+    }
+
+    public int GetItemCount(string _itemName)
+    {
+        int temp;
+        temp = SearchSlotItem(slots, _itemName);
+
+        return temp != 0 ? temp : SearchSlotItem(quickSlots, _itemName);
+    }
+
+    private int SearchSlotItem(ItemSlot[] _slots, string _itemName)
+    {
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i].item != null)
+            {
+                if (_itemName == _slots[i].item.itemName)
+                {
+                    return _slots[i].itemCount;
+                }
+            }
+        }
+    
+        // 아이템을 찾지 못한 경우 0을 반환
+        return 0;
+    }
+
+    public void SetItemCount(string _itemName, int _itemCount)
+    {
+        if(!ItemCountAdjust(slots, _itemName,_itemCount))
+        {
+            ItemCountAdjust(quickSlots, _itemName, _itemCount);
+        }
+    }
+
+    private bool ItemCountAdjust(ItemSlot[] _slots, string _itemName, int _itemCount)
+    {
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i].item != null)
+            {
+                if (_itemName == _slots[i].item.itemName)
+                {
+                    _slots[i].SetSlotCount(-_itemCount);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
     }
 }
