@@ -55,11 +55,16 @@ public class Inventory : MonoBehaviour
 
     private void OpenInventory()
     {
+        GameManager.isOpenInventory = true; 
+
         inventoryBase.SetActive(true);
     }
 
     private void CloseInventory()
     {
+        GameManager.isOpenInventory = false; 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         inventoryBase.SetActive(false);
     }
 
@@ -83,19 +88,18 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void PutSlot(ItemSlot[] slots, Item item, int count)
+    private void PutSlot(ItemSlot[] _slots, Item _item, int _count)
     {
-        if (Item.ItemType.Equipment != item.itemType)
+        if (Item.ItemType.Equipment != _item.itemType && Item.ItemType.Kit != _item.itemType)
         {
-
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = 0; i < _slots.Length; i++)
             {
-                if (slots[i].item != null)
+                if (_slots[i].item != null)
                 {
-                    if (slots[i].item.itemName == item.itemName)
+                    if (_slots[i].item.itemName == _item.itemName)
                     {
                         slotNum = i;
-                        slots[i].SetSlotCount(count);
+                        _slots[i].SetSlotCount(_count);
                         isNotPut = false;
                         return;
                     }
@@ -104,12 +108,12 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
-            if (slots[i].item == null)
+            if (_slots[i].item == null)
             {
                 Debug.Log("PICK UP");
-                slots[i].AddItem(item, count);
+                _slots[i].AddItem(_item, _count);
                 isNotPut = false;
                 return;
             }

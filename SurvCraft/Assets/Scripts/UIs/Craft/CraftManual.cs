@@ -134,6 +134,10 @@ public class CraftManual : MonoBehaviour
         go_Prefab = craft_selectedTab[selecteSlotNum].go_Prefab;
 
         isPreviewActivated = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         go_BaseUI.SetActive(false);
     }
 
@@ -162,7 +166,7 @@ public class CraftManual : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.B) && !isPreviewActivated)
-        {
+        { 
             CraftTab();
         }
 
@@ -187,6 +191,8 @@ public class CraftManual : MonoBehaviour
     {
         if(isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
+            GameManager.isOpenCraftManual = false;
+
             UseIngredient();
             Instantiate(go_Prefab, go_Preview.transform.position, go_Preview.transform.rotation);
             Destroy(go_Preview);
@@ -199,13 +205,15 @@ public class CraftManual : MonoBehaviour
 
     private void PreviewPositionUpdate()
     {
-        if(Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, layerMask))
+        GameManager.isOpenCraftManual = false;
+
+        if (Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, layerMask))
         {
             if(hitinfo.transform != null)
             {
                 Vector3 _location = hitinfo.point;
-                
-                if(Input.GetKeyDown(KeyCode.Q))
+
+                if (Input.GetKeyDown(KeyCode.Q))
                 {
                     go_Preview.transform.Rotate(0f, -90f, 0f);
                 }
@@ -217,19 +225,23 @@ public class CraftManual : MonoBehaviour
                 // y값은 0.1단위로 움직여서 조금 더 미세하게 움직임
                 _location.Set(Mathf.Round(_location.x), Mathf.Round(_location.y / 0.1f) * 0.1f, Mathf.Round(_location.z));
                 go_Preview.transform.position = _location;
-
             }
         }
     }
 
     private void CraftCancle()
     {
+        GameManager.isOpenCraftManual = false;
+
         Destroy(go_Preview);
 
         isActivated = false;
         isPreviewActivated = false;
         go_Preview = null;
         go_Prefab = null;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         go_BaseUI.SetActive(false);
     }
@@ -248,12 +260,20 @@ public class CraftManual : MonoBehaviour
 
     private void OpenCraftTab()
     {
+        GameManager.isOpenCraftManual = true;
+
         isActivated = true;
         go_BaseUI.SetActive(true);
     }
 
     private void CloseCraftTab()
     {
+        GameManager.isOpenCraftManual = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
         isActivated = false;
         go_BaseUI.SetActive(false);
     }

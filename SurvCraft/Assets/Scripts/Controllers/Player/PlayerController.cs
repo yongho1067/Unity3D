@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isActivated)
+        if (isActivated && GameManager.canPlayerMove)
         {
             Move();
         }
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(isActivated)
+        if(isActivated && GameManager.canPlayerMove)
         {
             #region Movement
             IsTouchingGround();

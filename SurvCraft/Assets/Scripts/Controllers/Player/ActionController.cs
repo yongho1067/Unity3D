@@ -13,6 +13,7 @@ public class ActionController : MonoBehaviour
     private bool dissolveActivated = false; // 고기 해체 가능할 시
     private bool isDissolving = false; // 고기 해체 중에는 true
     private bool fireLookActivated = false; // 불을 근접해서 바라 볼 시 true
+    private bool lookComputer = false; // 컴퓨터를 바라 볼 시 true
 
     // 충돌체 정보 저장
     private RaycastHit hitinfo;
@@ -20,17 +21,22 @@ public class ActionController : MonoBehaviour
     // 정확한 아이템 습득을 위한 보조장치
     [SerializeField] private LayerMask layerMask;
 
+    [SerializeField] private string sound_meat; // 소리재생
+    private int randomSound;
+
+    // 필요한 컴포넌트
     [SerializeField] private TextMeshProUGUI actionText;
     [SerializeField] private Inventory inventory;
     [SerializeField] WeaponManager weaponManager;
-    [SerializeField] private Transform tf_MeatDissolveTool; // 고기 해체 툴
-    private int randomSound;
-
     [SerializeField] QuickSlotController quickSlotController;
+    [SerializeField] private Transform tf_MeatDissolveTool; // 고기 해체 툴
+    [SerializeField] private Computer computerKit;
 
-    [SerializeField] private string sound_meat; // 소리재생
-
-
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Update()
     {
@@ -42,6 +48,7 @@ public class ActionController : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hitinfo, range, layerMask))
         {
             TryAction();
+
             if (hitinfo.transform.tag == "Item")
             {
                 IteminfoAppear();
@@ -54,6 +61,10 @@ public class ActionController : MonoBehaviour
             else if(hitinfo.transform.tag == "Fire")
             {  
                 FireInfoAppear();
+            }
+            else if(hitinfo.transform.tag == "Computer")
+            {
+                ComputerInfoAppear();
             }
             else
             {
@@ -72,6 +83,7 @@ public class ActionController : MonoBehaviour
         pickupActivated = false;
         dissolveActivated = false;
         fireLookActivated = false;
+        lookComputer = false;
     }
 
     private void IteminfoAppear()
@@ -80,6 +92,17 @@ public class ActionController : MonoBehaviour
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
         actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow>" + "(F)" + "</color>";
+    }
+
+    private void ComputerInfoAppear()
+    {
+        if(!hitinfo.transform.GetComponent<Computer>().isPowerOn)
+        {
+            Reset();
+            lookComputer = true;
+            actionText.gameObject.SetActive(true);
+            actionText.text = " 컴퓨터 가동 " + "<color=yellow>" + "(F)" + "</color>";
+        }
     }
 
     private void MeatinfoAppear()
@@ -112,6 +135,7 @@ public class ActionController : MonoBehaviour
         pickupActivated = false;
         dissolveActivated = false;
         fireLookActivated = false;
+        lookComputer = false;
         actionText.gameObject.SetActive(false);
     }
 
@@ -122,6 +146,7 @@ public class ActionController : MonoBehaviour
             PickUp();
             CanMeat();
             CanDropFire();
+            ComputerPowerOn();
             //Debug.Log(fireLookActivated);
         }
     }
@@ -222,6 +247,21 @@ public class ActionController : MonoBehaviour
                 break;
 
         }
-
     }
+
+    private void ComputerPowerOn()
+    {
+        if(lookComputer)
+        {
+            if(hitinfo.transform != null)
+            {
+                if(!hitinfo.transform.GetComponent<Computer>().isPowerOn)
+                {
+                    hitinfo.transform.GetComponent<Computer>().PowerOn();
+                    InfoDisappear();
+                }
+            }
+        }
+    }
+
 }

@@ -43,13 +43,6 @@ public class WeaponManager : MonoBehaviour
 
     [SerializeField] private Image BulletUI;
 
-
-
-    private void Awake()
-    {
-
-    }
-
     void Start()
     {
         for (int i = 0; i < guns.Length; i++)
@@ -135,6 +128,11 @@ public class WeaponManager : MonoBehaviour
                 break;
             case "HAND":
                 HandController.isActivate = false;
+
+                if(HandController.currentKit != null)
+                {
+                    handController.Cancel();
+                }
                 if(QuickSlotController.handItem != null)
                 {
                     Destroy(QuickSlotController.handItem);

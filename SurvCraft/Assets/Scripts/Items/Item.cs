@@ -11,6 +11,9 @@ public class Item : ScriptableObject
     public GameObject itemPrefab;
     [TextArea] public string itemDesc; // 아이템의 설명
 
+    public GameObject kitPrefab; // 키트 프리팹 
+    public GameObject kitPreviewPrefab; // 키트 프리뷰 프리팹
+
     // 무기 유형
     public string weaponType;
 
@@ -22,6 +25,7 @@ public class Item : ScriptableObject
         Equipment,
         Used,
         Ingredient,
+        Kit,
         ETC
     }
 }

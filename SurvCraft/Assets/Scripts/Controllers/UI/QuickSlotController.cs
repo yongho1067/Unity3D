@@ -176,7 +176,7 @@ public class QuickSlotController : MonoBehaviour
             if(quickSlots[selectedSlot].item.itemType == Item.ItemType.Equipment)
             {
                 StartCoroutine(weaponManager.ChangeWeaponCoroutine(quickSlots[selectedSlot].item.weaponType, quickSlots[selectedSlot].item.itemName));
-            }else if (quickSlots[selectedSlot].item.itemType == Item.ItemType.Used)
+            }else if (quickSlots[selectedSlot].item.itemType == Item.ItemType.Used || quickSlots[selectedSlot].item.itemType == Item.ItemType.Kit)
             {
                 ChangeHand(quickSlots[selectedSlot].item);
             }
@@ -199,24 +199,29 @@ public class QuickSlotController : MonoBehaviour
     /// <summary>
     /// 손에 들고 있는 아이템 변경
     /// </summary>
-    private void ChangeHand(Item item = null)
+    private void ChangeHand(Item _item = null)
     {
         StartCoroutine(weaponManager.ChangeWeaponCoroutine("HAND", "맨손"));
 
-        if(item != null)
+        if(_item != null)
         {
-            StartCoroutine(HandItemCoroutine());
+            StartCoroutine(HandItemCoroutine(_item));
         }
     }
 
     /// <summary>
     /// 손의 위치로 아이템 생성
     /// </summary>
-    IEnumerator HandItemCoroutine()
+    IEnumerator HandItemCoroutine(Item _item)
     {
         HandController.isActivate = false;
 
         yield return new WaitUntil(() => HandController.isActivate);
+
+        if(_item.itemType == Item.ItemType.Kit)
+        {
+            HandController.currentKit = _item;
+        }
 
         handItem = Instantiate(quickSlots[selectedSlot].item.itemPrefab, itemPos.position, itemPos.rotation);
 
