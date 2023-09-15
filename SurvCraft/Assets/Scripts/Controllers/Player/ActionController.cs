@@ -98,6 +98,7 @@ public class ActionController : MonoBehaviour
     {
         Reset();
         fireLookActivated = true;
+        Debug.Log(hitinfo.transform.GetComponent<Fire>());
 
         if (hitinfo.transform.GetComponent<Fire>().GetisFire())
         {

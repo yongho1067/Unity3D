@@ -63,7 +63,7 @@ public class CraftManual : MonoBehaviour
     
     private void Build()
     {
-        if(isPreviewActivated)
+        if(isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
             Instantiate(go_Prefab, go_Preview.transform.position, go_Preview.transform.rotation);
             Destroy(go_Preview);
@@ -81,7 +81,20 @@ public class CraftManual : MonoBehaviour
             if(hitinfo.transform != null)
             {
                 Vector3 _location = hitinfo.point;
+                
+                if(Input.GetKeyDown(KeyCode.Q))
+                {
+                    go_Preview.transform.Rotate(0f, -90f, 0f);
+                }
+                else if(Input.GetKeyDown(KeyCode.E))
+                {
+                    go_Preview.transform.Rotate(0f, 90f, 0f);
+                }
+
+                // y값은 0.1단위로 움직여서 조금 더 미세하게 움직임
+                _location.Set(Mathf.Round(_location.x), Mathf.Round(_location.y / 0.1f) * 0.1f, Mathf.Round(_location.z));
                 go_Preview.transform.position = _location;
+
             }
         }
     }

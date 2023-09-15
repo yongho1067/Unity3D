@@ -13,6 +13,7 @@ TagManager:
   - WeakAnimal
   - StrongAnimal
   - Fire
+  - Structure
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Player
   - Animal
   - Fire
-  - 
-  - 
+  - Terrain
+  - Building
   - 
   - 
   - 

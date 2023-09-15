@@ -56,11 +56,13 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\UIs\Craft\PreviewObject.cs" />
     <Compile Include="Assets\Scripts\Effects\Camera\WeaponSway.cs" />
     <Compile Include="Assets\Scripts\Effects\Fire\Offensive\Burn.cs" />
     <Compile Include="Assets\Scripts\Enviroments\Fire.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\AxeController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\GunController.cs" />
+    <Compile Include="Assets\Scripts\Effects\Fire\Food\FoodOnFire.cs" />
     <Compile Include="Assets\Scripts\Controllers\UI\QuickSlotController.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\OnlyCanInt.cs" />
     <Compile Include="Assets\Scripts\Animals\WeakAnimal.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Assets\Scripts\Enviroments\Twig.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\UIs\HUD\Crosshair.cs" />
+    <Compile Include="Assets\Scripts\UIs\Craft\CraftManual.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\InputNumber.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
@@ -93,8 +96,7 @@
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\SlotToolTip.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Animals\Pig\Pig.cs" />
-    <Compile Include="Assets\Scripts\Effects\Fire\Food\FoodOnFire.cs" />
-    <Compile Include="Assets\Scripts\UIs\Craft\CraftManual.cs" />
+    <Compile Include="Assets\Scripts\Building\Building.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
