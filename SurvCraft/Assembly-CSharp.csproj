@@ -75,8 +75,10 @@
     <Compile Include="Assets\Scripts\Enviroments\Rock.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\DragSlot.cs" />
     <Compile Include="Assets\Scripts\Enviroments\Tree.cs" />
+    <Compile Include="Assets\Scripts\Computer\Computer.cs" />
     <Compile Include="Assets\Scripts\Animals\Pig\WildPig.cs" />
     <Compile Include="Assets\Scripts\Managers\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\UIs\Computer\ComputerToolTip.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\StatusController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\CloseWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\ActionController.cs" />
@@ -91,16 +93,14 @@
     <Compile Include="Assets\Scripts\UIs\HUD\Crosshair.cs" />
     <Compile Include="Assets\Scripts\UIs\Craft\CraftManual.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\InputNumber.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\HandController.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\SlotToolTip.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Animals\Pig\Pig.cs" />
-    <Compile Include="Assets\Scripts\Computer\Computer.cs" />
-    <Compile Include="Assets\Scripts\UIs\Computer\ComputerToolTip.cs" />
     <Compile Include="Assets\Scripts\UIs\Computer\ComputerButton.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
