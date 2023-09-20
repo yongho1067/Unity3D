@@ -7,7 +7,7 @@ public class HandController : CloseWeaponController
     // 활성화 여부
     public static bool isActivate = true;
     [SerializeField] private QuickSlotController quickSlotController;
-    public static Item currentKit; // 설치하려는 킷
+    [SerializeField] public static Item currentKit; // 설치하려는 킷
 
     private bool isPreview = false;
 

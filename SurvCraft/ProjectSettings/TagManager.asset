@@ -15,6 +15,7 @@ TagManager:
   - Fire
   - Structure
   - Computer
+  - ArchemyTable
   layers:
   - Default
   - TransparentFX

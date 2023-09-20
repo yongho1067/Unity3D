@@ -378,6 +378,7 @@
 "Assets/Scripts/Managers/GameManager.cs"
 "Assets/Scripts/Managers/SoundManager.cs"
 "Assets/Scripts/Managers/WeaponManager.cs"
+"Assets/Scripts/UIs/ArchemyTable/ArchemyTable.cs"
 "Assets/Scripts/UIs/Computer/ComputerButton.cs"
 "Assets/Scripts/UIs/Computer/ComputerToolTip.cs"
 "Assets/Scripts/UIs/Craft/CraftManual.cs"

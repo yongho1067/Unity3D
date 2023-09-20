@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Animals\Pig\Pig.cs" />
     <Compile Include="Assets\Scripts\UIs\Computer\ComputerButton.cs" />
+    <Compile Include="Assets\Scripts\UIs\ArchemyTable\ArchemyTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

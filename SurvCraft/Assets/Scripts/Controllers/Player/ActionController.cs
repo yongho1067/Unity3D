@@ -14,6 +14,7 @@ public class ActionController : MonoBehaviour
     private bool isDissolving = false; // 고기 해체 중에는 true
     private bool fireLookActivated = false; // 불을 근접해서 바라 볼 시 true
     private bool lookComputer = false; // 컴퓨터를 바라 볼 시 true
+    private bool lookArchemyTable = false; // 연금 테이블을 바라볼 시 true
 
     // 충돌체 정보 저장
     private RaycastHit hitinfo;
@@ -66,6 +67,10 @@ public class ActionController : MonoBehaviour
             {
                 ComputerInfoAppear();
             }
+            else if(hitinfo.transform.tag =="ArchemyTable")
+            {
+                ArchemyInfoAppear();
+            }
             else
             {
                 InfoDisappear();
@@ -84,6 +89,7 @@ public class ActionController : MonoBehaviour
         dissolveActivated = false;
         fireLookActivated = false;
         lookComputer = false;
+        lookArchemyTable = false;
     }
 
     private void IteminfoAppear()
@@ -103,6 +109,15 @@ public class ActionController : MonoBehaviour
             actionText.gameObject.SetActive(true);
             actionText.text = " 컴퓨터 가동 " + "<color=yellow>" + "(F)" + "</color>";
         }
+    }
+
+    private void ArchemyInfoAppear()
+    {
+        Reset();
+        lookArchemyTable = true;
+        actionText.gameObject.SetActive(true);
+        actionText.text = " 연금 테이블 조작 " + "<color=yellow>" + "(F)" + "</color>";
+        
     }
 
     private void MeatinfoAppear()
@@ -136,6 +151,7 @@ public class ActionController : MonoBehaviour
         dissolveActivated = false;
         fireLookActivated = false;
         lookComputer = false;
+        lookArchemyTable = false;
         actionText.gameObject.SetActive(false);
     }
 
@@ -147,6 +163,7 @@ public class ActionController : MonoBehaviour
             CanMeat();
             CanDropFire();
             ComputerPowerOn();
+            CanArchemyTableOpen();
             //Debug.Log(fireLookActivated);
         }
     }
@@ -260,6 +277,19 @@ public class ActionController : MonoBehaviour
                     hitinfo.transform.GetComponent<Computer>().PowerOn();
                     InfoDisappear();
                 }
+            }
+        }
+    }
+
+    private void CanArchemyTableOpen()
+    {
+        if (lookArchemyTable)
+        {
+            if (hitinfo.transform != null)
+            {
+                hitinfo.transform.GetComponent<ArchemyTable>().Window();
+                InfoDisappear();
+
             }
         }
     }
