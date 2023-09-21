@@ -97,11 +97,11 @@
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapon\HandController.cs" />
+    <Compile Include="Assets\Scripts\UIs\ArchemyTable\ArchemyTable.cs" />
     <Compile Include="Assets\Scripts\UIs\Inventory\Slot\SlotToolTip.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Animals\Pig\Pig.cs" />
     <Compile Include="Assets\Scripts\UIs\Computer\ComputerButton.cs" />
-    <Compile Include="Assets\Scripts\UIs\ArchemyTable\ArchemyTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
