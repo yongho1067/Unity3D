@@ -113,11 +113,13 @@ public class ActionController : MonoBehaviour
 
     private void ArchemyInfoAppear()
     {
-        Reset();
-        lookArchemyTable = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = " 연금 테이블 조작 " + "<color=yellow>" + "(F)" + "</color>";
-        
+        if(!hitinfo.transform.GetComponent<ArchemyTable>().GetisOpen())
+        {
+            Reset();
+            lookArchemyTable = true;
+            actionText.gameObject.SetActive(true);
+            actionText.text = " 연금 테이블 조작 " + "<color=yellow>" + "(F)" + "</color>";
+        }     
     }
 
     private void MeatinfoAppear()

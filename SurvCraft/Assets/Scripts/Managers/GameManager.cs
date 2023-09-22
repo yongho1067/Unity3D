@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     public static bool isOpenArchemyTable = false; // 연금 테이블 창 활성화
     public static bool isPowerOnComputer = false;
 
+    public static bool isPause = false; // 메뉴가 호출되면 true
+
     private void Update()
     {
-        if (isOpenInventory || isOpenCraftManual || isPowerOnComputer || isOpenArchemyTable)
+        if (isOpenInventory || isOpenCraftManual || isPowerOnComputer || isOpenArchemyTable || isPause)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

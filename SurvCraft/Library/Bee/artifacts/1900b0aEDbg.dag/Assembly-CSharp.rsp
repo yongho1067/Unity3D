@@ -378,6 +378,7 @@
 "Assets/Scripts/Managers/GameManager.cs"
 "Assets/Scripts/Managers/SoundManager.cs"
 "Assets/Scripts/Managers/WeaponManager.cs"
+"Assets/Scripts/SaveNLoad.cs"
 "Assets/Scripts/UIs/ArchemyTable/ArchemyTable.cs"
 "Assets/Scripts/UIs/Computer/ComputerButton.cs"
 "Assets/Scripts/UIs/Computer/ComputerToolTip.cs"
@@ -391,6 +392,8 @@
 "Assets/Scripts/UIs/Inventory/Slot/DragSlot.cs"
 "Assets/Scripts/UIs/Inventory/Slot/ItemSlot.cs"
 "Assets/Scripts/UIs/Inventory/Slot/SlotToolTip.cs"
+"Assets/Scripts/UIs/Menu/PauseMenu.cs"
+"Assets/Scripts/UIs/Menu/Title.cs"
 "Assets/Scripts/Weapons/CloseWeapon.cs"
 "Assets/Scripts/Weapons/Gun.cs"
 -langversion:9.0
